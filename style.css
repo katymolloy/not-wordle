@@ -1,6 +1,5 @@
 body {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
   background-color: black;
@@ -11,17 +10,18 @@ h1 {
   font-family: gambado-sans-forte, sans-serif;
   font-weight: 700;
   font-style: normal;
+  font-size: 45px;
 }
 
 hr {
   color: white;
-  /* width: 2px; */
+  width: 100%;
 }
-
 
 .inputContainer {
   display: flex;
   flex-direction: column;
+  padding: 20rem;
 }
 
 #row1,
@@ -39,4 +39,10 @@ hr {
   width: 4rem;
   margin-bottom: 0.3rem;
   background-color: white;
+  font-size: 40px;
+  text-align: center;
+}
+
+input{
+  user-select: none;
 }

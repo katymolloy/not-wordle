@@ -4,53 +4,56 @@
     <meta charset="UTF-8" />
     <link href="style.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <!-- font import -->
-    <link rel="stylesheet" href="https://use.typekit.net/bca5qop.css">
+    <link rel="stylesheet" href="https://use.typekit.net/bca5qop.css" />
     <script defer src="script.js"></script>
     <title>(Not) Wordle</title>
   </head>
   <body>
     <header>
       <h1>(Not) Wordle</h1>
-      <hr />
     </header>
+    <hr />
     <main id="mainContainer">
       <div id="inputContainer">
         <div id="row1">
-          <div id="a1" class="letterInput"><input type="text"></div>
-          <div id="a2" class="letterInput"></div>
-          <div id="a3" class="letterInput"></div>
-          <div id="a4" class="letterInput"></div>
-          <div id="a5" class="letterInput"></div>
+          <input type="text" class="letterInput" id="a1" maxlength="1" />
+          <input type="text" class="letterInput" id="a2" maxlength="1" />
+          <input type="text" class="letterInput" id="a3" maxlength="1" />
+          <input type="text" class="letterInput" id="a4" maxlength="1" />
+          <input type="text" class="letterInput" id="a5" maxlength="1" />
         </div>
         <div id="row2">
-          <div id="b1" class="letterInput"></div>
-          <div id="b2" class="letterInput"></div>
-          <div id="b3" class="letterInput"></div>
-          <div id="b4" class="letterInput"></div>
-          <div id="b5" class="letterInput"></div>
+          <input type="text" class="letterInput" id="b1" maxlength="1" />
+          <input type="text" class="letterInput" id="b2" maxlength="1" />
+          <input type="text" class="letterInput" id="b3" maxlength="1" />
+          <input type="text" class="letterInput" id="b4" maxlength="1" />
+          <input type="text" class="letterInput" id="b5" maxlength="1" />
         </div>
         <div id="row3">
-          <div id="c1" class="letterInput"></div>
-          <div id="c2" class="letterInput"></div>
-          <div id="c3" class="letterInput"></div>
-          <div id="c4" class="letterInput"></div>
-          <div id="c5" class="letterInput"></div>
+          <input type="text" class="letterInput" id="c1" maxlength="1" />
+          <input type="text" class="letterInput" id="c2" maxlength="1" />
+          <input type="text" class="letterInput" id="c3" maxlength="1" />
+          <input type="text" class="letterInput" id="c4" maxlength="1" />
+          <input type="text" class="letterInput" id="c5" maxlength="1" />
         </div>
         <div id="row4">
-          <div id="d1" class="letterInput"></div>
-          <div id="d2" class="letterInput"></div>
-          <div id="d3" class="letterInput"></div>
-          <div id="d4" class="letterInput"></div>
-          <div id="d5" class="letterInput"></div>
+          <input type="text" class="letterInput" id="d1" maxlength="1" />
+          <input type="text" class="letterInput" id="d2" maxlength="1" />
+          <input type="text" class="letterInput" id="d3" maxlength="1" />
+          <input type="text" class="letterInput" id="d4" maxlength="1" />
+          <input type="text" class="letterInput" id="d5" maxlength="1" />
         </div>
         <div id="row5">
-          <div id="e1" class="letterInput"></div>
-          <div id="e2" class="letterInput"></div>
-          <div id="e3" class="letterInput"></div>
-          <div id="e4" class="letterInput"></div>
-          <div id="e5" class="letterInput"></div>
+          <input type="text" class="letterInput" id="e1" maxlength="1" />
+          <input type="text" class="letterInput" id="e2" maxlength="1" />
+          <input type="text" class="letterInput" id="e3" maxlength="1" />
+          <input type="text" class="letterInput" id="e4" maxlength="1" />
+          <input type="text" class="letterInput" id="e5" maxlength="1" />
         </div>
+        <button type="button" id="clearFields">Clear</button>
       </div>
     </main>
   </body>
