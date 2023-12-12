@@ -1,3 +1,42 @@
-:root{
-    
+body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+}
+
+h1 {
+  color: white;
+  font-family: gambado-sans-forte, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+hr {
+  color: white;
+  /* width: 2px; */
+}
+
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+#row1,
+#row2,
+#row3,
+#row4,
+#row5 {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.letterInput {
+  border: solid 1px black;
+  height: 4rem;
+  width: 4rem;
+  margin-bottom: 0.3rem;
+  background-color: white;
 }
