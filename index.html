@@ -13,48 +13,93 @@
   </head>
   <body>
     <header>
-      <h1>(Not) Wordle</h1>
+      <h1>Not Wordle</h1>
     </header>
     <hr />
     <main id="mainContainer">
       <div id="inputContainer">
         <div id="row1">
-          <input type="text" class="letterInput" id="a1" maxlength="1" />
+          <div class="letterInput" id="a1" tabindex="0"></div>
+          <div class="letterInput" id="a2" ></div>
+          <div class="letterInput" id="a3" ></div>
+          <div class="letterInput" id="a4" ></div>
+          <div class="letterInput" id="a5"></div>
+
+          <!-- <input type="text" class="letterInput" id="a1" maxlength="1" />
           <input type="text" class="letterInput" id="a2" maxlength="1" />
           <input type="text" class="letterInput" id="a3" maxlength="1" />
           <input type="text" class="letterInput" id="a4" maxlength="1" />
-          <input type="text" class="letterInput" id="a5" maxlength="1" />
+          <input type="text" class="letterInput" id="a5" maxlength="1" /> -->
         </div>
         <div id="row2">
-          <input type="text" class="letterInput" id="b1" maxlength="1" />
+          <div class="letterInput" id="b1" tabindex="0"></div>
+          <div class="letterInput" id="b2" tabindex="0"></div>
+          <div class="letterInput" id="b3" tabindex="0"></div>
+          <div class="letterInput" id="b4" tabindex="0"></div>
+          <div class="letterInput" id="b5" tabindex="0"></div>
+
+          <!-- <input type="text" class="letterInput" id="b1" maxlength="1" />
           <input type="text" class="letterInput" id="b2" maxlength="1" />
           <input type="text" class="letterInput" id="b3" maxlength="1" />
           <input type="text" class="letterInput" id="b4" maxlength="1" />
-          <input type="text" class="letterInput" id="b5" maxlength="1" />
+          <input type="text" class="letterInput" id="b5" maxlength="1" /> -->
         </div>
         <div id="row3">
+          <div class="letterInput" id="c1" tabindex="0"></div>
+          <div class="letterInput" id="c2" tabindex="0"></div>
+          <div class="letterInput" id="c3" tabindex="0"></div>
+          <div class="letterInput" id="c4" tabindex="0"></div>
+          <div class="letterInput" id="c5" tabindex="0"></div>
+
+          <!-- 
           <input type="text" class="letterInput" id="c1" maxlength="1" />
           <input type="text" class="letterInput" id="c2" maxlength="1" />
           <input type="text" class="letterInput" id="c3" maxlength="1" />
           <input type="text" class="letterInput" id="c4" maxlength="1" />
-          <input type="text" class="letterInput" id="c5" maxlength="1" />
+          <input type="text" class="letterInput" id="c5" maxlength="1" /> -->
         </div>
         <div id="row4">
-          <input type="text" class="letterInput" id="d1" maxlength="1" />
+          <div class="letterInput" id="d1"></div>
+          <div class="letterInput" id="d2"></div>
+          <div class="letterInput" id="d3"></div>
+          <div class="letterInput" id="d4"></div>
+          <div class="letterInput" id="d5"></div>
+
+          <!-- <input type="text" class="letterInput" id="d1" maxlength="1" />
           <input type="text" class="letterInput" id="d2" maxlength="1" />
           <input type="text" class="letterInput" id="d3" maxlength="1" />
           <input type="text" class="letterInput" id="d4" maxlength="1" />
-          <input type="text" class="letterInput" id="d5" maxlength="1" />
+          <input type="text" class="letterInput" id="d5" maxlength="1" /> -->
         </div>
         <div id="row5">
+          <div class="letterInput" id="e1"></div>
+          <div class="letterInput" id="e2"></div>
+          <div class="letterInput" id="e3"></div>
+          <div class="letterInput" id="e4"></div>
+          <div class="letterInput" id="e5"></div>
+          <!-- 
           <input type="text" class="letterInput" id="e1" maxlength="1" />
           <input type="text" class="letterInput" id="e2" maxlength="1" />
           <input type="text" class="letterInput" id="e3" maxlength="1" />
           <input type="text" class="letterInput" id="e4" maxlength="1" />
-          <input type="text" class="letterInput" id="e5" maxlength="1" />
+          <input type="text" class="letterInput" id="e5" maxlength="1" /> -->
+        </div>
+        <div id="row6">
+          <div class="letterInput" id="f1"></div>
+          <div class="letterInput" id="f2"></div>
+          <div class="letterInput" id="f3"></div>
+          <div class="letterInput" id="f4"></div>
+          <div class="letterInput" id="f5"></div>
+          <!-- <input type="text" class="letterInput" id="e1" maxlength="1" />
+          <input type="text" class="letterInput" id="e2" maxlength="1" />
+          <input type="text" class="letterInput" id="e3" maxlength="1" />
+          <input type="text" class="letterInput" id="e4" maxlength="1" />
+          <input type="text" class="letterInput" id="e5" maxlength="1" /> -->
         </div>
         <button type="button" id="clearFields">Clear</button>
+        <button type="button" id="checkAnswer">Enter</button>
       </div>
+      <div class="keyboardContainer"></div>
     </main>
   </body>
 </html>

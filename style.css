@@ -2,7 +2,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: black;
+  background-color: rgb(18, 18, 19);
+  
 }
 
 h1 {
@@ -14,35 +15,38 @@ h1 {
 }
 
 hr {
-  color: white;
+  /* color: #818384; */
+ border-top: 0.5px solid rgba(97, 97, 100, 0.5);
   width: 100%;
 }
 
 .inputContainer {
   display: flex;
   flex-direction: column;
-  padding: 20rem;
 }
 
 #row1,
 #row2,
 #row3,
 #row4,
-#row5 {
+#row5, 
+#row6 {
   display: flex;
   gap: 0.3rem;
 }
 
+
 .letterInput {
-  border: solid 1px black;
-  height: 4rem;
-  width: 4rem;
+  border: solid 2px rgba(97, 97, 100, 0.5);
+  height: 3.5rem;
+  width: 3.5rem;
   margin-bottom: 0.3rem;
-  background-color: white;
+  background-color: #121213;
   font-size: 40px;
   text-align: center;
 }
 
 input{
   user-select: none;
+  color: white
 }
