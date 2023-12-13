@@ -1,7 +1,9 @@
 
 const ALL_WORDS = 14855;
 var wordToFind = '';
+var wordAttempt = '';
 var attemptNumber = 1
+var divIdIndex = 0
 const divFocus = document.querySelectorAll('.letterInput')
 
 
@@ -19,27 +21,39 @@ randomNum();
 
 
 
+$(document).keypress(function (e) {
+    let currentDiv = '#' + divFocus[divIdIndex].id;
 
-// function to jump to next input
-$(document).keydown(function (e) {
-    let currentDiv = divFocus[0].id
-    console.log(e.key)
+    if (e.which === 13) {
+        checkAnswer(wordAttempt)
+        wordAttempt = ''
+    } else {
+        if (wordAttempt.length === 5) {
+            console.log('At yer limit pardner')
+           
+        } else {
+            $(currentDiv).text(e.key.toUpperCase());
+            wordAttempt += e.key
+            divIdIndex++;
+        }
+
+
+    }
+
+
+
 });
 
 
+
+
 $('#clearFields').click(function () {
-    $('.letterInput').val('')
+    $('.letterInput').text('')
     randomNum();
 });
 
 
-$('#checkAnswer').click(function () {
-    var wordAttempt = ''
+const checkAnswer = (word) => {
+console.log(word)
 
-    $(`${'#row' + attemptNumber} input`).each(function () {
-        wordAttempt += $(this).val();
-    });
-    console.log(wordAttempt)
-
-    ++attemptNumber
-})
+}
