@@ -1,13 +1,21 @@
+:root {
+  --background: #121213;
+  --accentGray: #61616580;
+  --text: #ffffff;
+}
+
 body {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background-color: rgb(18, 18, 19);
+  background-color: var(--background);
   font-family: arial;
+  margin: 0;
 }
 
 h1 {
-  color: white;
+  color: var(--text);
   font-family: gambado-sans-forte, sans-serif;
   font-weight: 700;
   font-style: normal;
@@ -15,14 +23,14 @@ h1 {
 }
 
 hr {
-  /* color: #818384; */
-  border-top: 0.5px solid rgba(97, 97, 100, 0.5);
+  border-top: 0.5px solid var(--accentGray);
   width: 100%;
 }
-
-.inputContainer {
+#mainContainer {
+  flex: 1;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #row1,
@@ -32,23 +40,17 @@ hr {
 #row5,
 #row6 {
   display: flex;
-  gap: 0.3rem;
+  gap: 0.2rem;
 }
 
 .letterInput {
-  border: solid 2px rgba(97, 97, 100, 0.5);
+  border: solid 2px var(--accentGray);
   height: 3.5rem;
   width: 3.5rem;
-  margin-bottom: 0.3rem;
-  background-color: #121213;
+  margin-bottom: 0.2rem;
   font-size: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
-}
-
-input {
-  user-select: none;
-  color: white;
+  color: var(--text);
 }
