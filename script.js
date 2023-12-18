@@ -2,14 +2,15 @@
 const ALL_WORDS = 14855;
 var wordToFind = '';
 var wordAttempt = '';
-var attemptNumber = 1
+var workingDivs = [];
 var divIdIndex = 0
-const divFocus = document.querySelectorAll('.letterInput')
+const divFocus = $('.letterInput')
+console.log(divFocus)
 
 
 function randomNum() {
     let index = Math.floor(Math.random() * (ALL_WORDS + 1));
-    console.log(index)
+
     $.get('./data/valid-wordle-words.txt', function (data) {
         let allWords = data.split("\n")
         wordToFind = allWords[index]
@@ -23,14 +24,11 @@ randomNum();
 
 
 $(document).keypress(function (e) {
-    // no keyword to ensure variable is global; less redundancy 
-    currentDiv = '#' + divFocus[divIdIndex].id;
-
-
     if (e.which !== 13 && e.which !== 8) {
         if (wordAttempt.length < 5) {
-            $(currentDiv).text(e.key.toUpperCase());
-
+            $(divFocus[divIdIndex]).text(e.key.toUpperCase());
+            workingDivs.push(divFocus[divIdIndex].id)
+            // console.log(workingDivs)
             wordAttempt += e.key;
             divIdIndex++;
         } else {
@@ -46,20 +44,19 @@ $(document).keypress(function (e) {
 $(document).keydown(function (e) {
     switch (e.which) {
         case 13:
-            console.log('I pressed enter')
+            console.log(workingDivs)
             checkAnswer(wordAttempt);
             wordAttempt = '';
             break;
         case 8:
-            console.log('pressed back, first index and word: ' + divIdIndex + ', ' + wordAttempt)
-            // last character is removed and reassigned
-            wordAttempt = wordAttempt.slice(0, -1)
-            divIdIndex--
-            console.log(currentDiv)
-            // empty function is used to remove text child node from div being backspacedF
-            $(currentDiv).empty();
-            console.log('updated index and word: ' + divIdIndex + ', ' + wordAttempt)
-            break;
+            if (wordAttempt.length > 0) {
+                wordAttempt = wordAttempt.slice(0, -1)
+                divIdIndex--
+
+                $(divFocus[divIdIndex]).empty();
+                break;
+            }
+
     }
 })
 
@@ -67,7 +64,22 @@ $(document).keydown(function (e) {
 
 const checkAnswer = (word) => {
     console.log(word, wordToFind)
+    workingDivs = [];
     for (let i = 0; i < word.length; i++) {
-        console.log(word[i] + ' ' + wordToFind[i])
+        if (word[i] === wordToFind[i]) {
+            console.log('here')
+        } else if (wordToFind.includes(word[i])) {
+            console.log('close match')
+        }
     }
+
+    // for (let i = 0; i < word.length; i++) {
+    //     // console.log(word[i] + ' ' + wordToFind[i])
+    //     if (word[i] === wordToFind[i]) {
+    //         $(divFocus.id).filter(function() {
+    //             return $(this).text().includes(word[i]);
+    //           }).addClass('correctGuess');
+    //     }
+    // }
+
 }
