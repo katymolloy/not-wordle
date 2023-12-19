@@ -1,5 +1,6 @@
 
-const ALL_WORDS = 14855;
+const ALL_WORDS = 2315;
+var validGuesses = [];
 var everyWord = []
 var wordToFind = '';
 var wordAttempt = '';
@@ -9,20 +10,72 @@ var divIdIndex = 0
 const divFocus = $('.letterInput');
 const keys = $('.keyboardKey')
 
-
+// function to select a word as the correct answer
 function randomNum() {
     let index = Math.floor(Math.random() * (ALL_WORDS + 1));
 
-    $.get('./data/valid-wordle-words.txt', function (data) {
+    $.get('./data/wordle-answers-alphabetical.txt', function (data) {
         everyWord = data.split("\n");
-
         wordToFind = everyWord[index]
         // take out before adding to vercel - no cheating on my watch
         console.log(wordToFind)
     }, 'text');
-}
 
+    $.get('./data/valid-wordle-words.txt', function (data) {
+        validGuesses = data.split("\n");
+    }, 'text');
+}
+// calling the function to get a word
 randomNum();
+
+
+
+$(keys).on('click', function () {
+    switch ($(this).val()) {
+        case 'enter':
+            if ($.inArray(wordAttempt.toLowerCase(), validGuesses) !== -1) {
+                checkAnswer(wordAttempt.toLowerCase());
+                wordAttempt = '';
+            } else {
+                $(workingDivs[0]).parent().addClass('wrongAnswer')
+                workingDivs = [];
+                setTimeout(() => {
+                    $(workingDivs[0]).parent().removeClass('wrongAnswer')
+                }, 1000)
+
+            }
+            break;
+        case 'back':
+            if (wordAttempt.length > 0) {
+                wordAttempt = wordAttempt.slice(0, -1)
+                divIdIndex--
+                workingDivs.splice(-1, 1)
+                $(divFocus[divIdIndex]).empty();
+
+            }
+            break;
+        default:
+            if (wordAttempt.length < 5) {
+                $(divFocus[divIdIndex]).text($(this).val());
+                $(divFocus[divIdIndex]).addClass('addLetter');
+                workingDivs.push('#' + divFocus[divIdIndex].id)
+                // workingLetters.push(e.key.toUpperCase())
+
+                wordAttempt += $(this).val();
+                setTimeout(() => {
+                    $(divFocus[divIdIndex]).removeClass('addLetter')
+                }, 1000)
+
+                divIdIndex++;
+            } else {
+                console.log('At yer limit, pardner');
+            }
+            break;
+    }
+})
+
+
+
 
 
 
@@ -48,25 +101,8 @@ $(document).keypress(function (e) {
 
 
 
-$(keys).on('click', function () {
-    console.log($(this).val())
-    if (wordAttempt.length < 5) {
-        $(divFocus[divIdIndex]).text($(this).val());
-        $(divFocus[divIdIndex]).addClass('addLetter');
-        workingDivs.push('#' + divFocus[divIdIndex].id)
-        // workingLetters.push(e.key.toUpperCase())
-
-        wordAttempt += $(this).val();
-        setTimeout(() => {
-            $(divFocus[divIdIndex]).removeClass('addLetter')
-        }, 1000)
 
 
-        divIdIndex++;
-    } else {
-        console.log('At yer limit, pardner');
-    }
-})
 
 
 
@@ -76,15 +112,17 @@ $(document).keydown(function (e) {
         // enter
         case 13:
             // ensure word input is valid
-            if ($.inArray(wordAttempt, everyWord) !== -1) {
+            if ($.inArray(wordAttempt, validGuesses) !== -1) {
                 checkAnswer(wordAttempt);
                 wordAttempt = '';
 
             } else {
                 $(workingDivs[0]).parent().addClass('wrongAnswer')
                 workingDivs = [];
+                setTimeout(() => {
+                    $(workingDivs[0]).parent().removeClass('wrongAnswer')
+                }, 1000)
             }
-            $(workingDivs[0]).parent().removeClass('wrongAnswer')
             break;
         // backspace
         case 8:
@@ -101,13 +139,8 @@ $(document).keydown(function (e) {
 
 
 const checkAnswer = (word) => {
-    console.log(workingLetters)
-
     switch (word === wordToFind) {
         case false:
-
-
-
             for (let i = 0; i < word.length; i++) {
                 if (word[i] === wordToFind[i]) {
                     $.inArray(word[i], keys)
@@ -134,9 +167,26 @@ const checkAnswer = (word) => {
 
 const celebration = () => {
     for (let i = 0; i < workingDivs.length; i++) {
-        $(workingDivs[i]).addClass('correctGuess')
+        $(workingDivs[i]).addClass('correctGuess hellYeah')
     }
-    $(workingDivs[0]).parent().addClass('hellYeah')
-    // $('body').addClass('hellYeah')
-    workingDivs = [];
+   
+    $('#winModal').addClass('modalSeen')
+
 }
+
+
+$('#playAgain').on('click', function () {
+    // if user chooses to play again, variables are all reset
+    wordAttempt = '';
+    workingDivs = [];
+    divIdIndex = 0
+    // next word is selected
+    randomNum();
+    // modal is hidden again
+    $('#winModal').removeClass('modalSeen')
+    // all classes are removed, divs are emptied
+    for (let i = 0; i < divFocus.length; i++) {
+        $(divFocus[i]).empty()
+        $(divFocus[i]).removeClass('correctGuess wrongGuess closeGuess addLetter');
+    }
+})
