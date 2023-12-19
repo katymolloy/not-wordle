@@ -1,14 +1,18 @@
 
 const ALL_WORDS = 2315;
+const divFocus = $('.letterInput');
+const keys = $('.keyboardKey').toArray();
+console.log(keys)
 var validGuesses = [];
 var everyWord = []
 var wordToFind = '';
 var wordAttempt = '';
+var attemptNo = 0;
 var workingDivs = [];
 var workingLetters = [];
-var divIdIndex = 0
-const divFocus = $('.letterInput');
-const keys = $('.keyboardKey')
+var divIdIndex = 0;
+var winner = false;
+
 
 // function to select a word as the correct answer
 function randomNum() {
@@ -62,14 +66,15 @@ $(keys).on('click', function () {
                 // workingLetters.push(e.key.toUpperCase())
 
                 wordAttempt += $(this).val();
-                setTimeout(() => {
-                    $(divFocus[divIdIndex]).removeClass('addLetter')
-                }, 1000)
+
+                $(divFocus[divIdIndex]).removeClass('addLetter')
+
 
                 divIdIndex++;
             } else {
                 console.log('At yer limit, pardner');
             }
+
             break;
     }
 })
@@ -88,9 +93,9 @@ $(document).keypress(function (e) {
             workingLetters.push(e.key.toUpperCase())
 
             wordAttempt += e.key;
-            setTimeout(() => {
-                $(divFocus[divIdIndex]).removeClass('addLetter')
-            }, 1000)
+            // setTimeout(() => {
+            //     $(divFocus[divIdIndex]).removeClass('addLetter')
+            // }, 1000)
 
             divIdIndex++;
         } else {
@@ -128,6 +133,7 @@ $(document).keydown(function (e) {
         case 8:
             if (wordAttempt.length > 0) {
                 wordAttempt = wordAttempt.slice(0, -1)
+                $(divFocus[divIdIndex]).removeClass('addLetter')
                 divIdIndex--
                 workingDivs.splice(-1, 1)
                 $(divFocus[divIdIndex]).empty();
@@ -139,38 +145,76 @@ $(document).keydown(function (e) {
 
 
 const checkAnswer = (word) => {
-    switch (word === wordToFind) {
-        case false:
-            for (let i = 0; i < word.length; i++) {
-                if (word[i] === wordToFind[i]) {
-                    $.inArray(word[i], keys)
-                    $(workingDivs[i]).addClass('correctGuess')
+    attemptNo++;
 
-                } else if (wordToFind.includes(word[i])) {
 
-                    $(workingDivs[i]).addClass('closeGuess')
 
-                } else {
-                    $(workingDivs[i]).addClass('wrongGuess')
 
+    if (attemptNo < 6) {
+
+        switch (word === wordToFind) {
+            case false:
+                for (let i = 0; i < word.length; i++) {
+                    if (word[i] === wordToFind[i]) {
+                        $(workingDivs[i]).addClass('correctGuess')
+
+                        for (let j = 0; j < keys.length; j++) {
+                            if (keys[j].value === word[i]) {
+                                $(keys[j]).addClass('correctGuess')
+                            }
+                        }
+
+                    } else if (wordToFind.includes(word[i])) {
+                        $(workingDivs[i]).addClass('closeGuess');
+
+                        for (let j = 0; j < keys.length; j++) {
+                            if (keys[j].value === word[i]) {
+                                $(keys[j]).addClass('closeGuess')
+                            }
+                        }
+
+                    } else {
+                        $(workingDivs[i]).addClass('wrongGuess');
+
+                        for (let j = 0; j < keys.length; j++) {
+                            if (keys[j].value === word[i]) {
+                                $(keys[j]).addClass('wrongGuess')
+                            }
+                        }
+                    }
                 }
-            }
-            workingDivs = [];
-            break
-            ;
-        case true:
+                workingDivs = [];
+                break
+                ;
+            case true:
+                for (let i = 0; i < workingDivs.length; i++) {
+                    $(workingDivs[i]).addClass('correctGuess hellYeah')
+                }
+                winner = true;
+                celebration(winner);
+                break;
+        }
 
-            celebration();
-            break;
     }
 }
 
-const celebration = () => {
-    for (let i = 0; i < workingDivs.length; i++) {
-        $(workingDivs[i]).addClass('correctGuess hellYeah')
+const celebration = (w) => {
+    // 
+    switch (w) {
+        case true:
+            setTimeout(() => {
+                $('#modalContent').text('Congrats! You correctly guessed the word.')
+                $('#winModal').addClass('modalSeen')
+            }, 1000)
+
+            break;
+        case false:
+            setTimeout(() => {
+                $('#modalContent').text("Sorry, you lost this game. Try again?")
+                $('#winModal').addClass('modalSeen')
+            }, 1000)
+            break;
     }
-   
-    $('#winModal').addClass('modalSeen')
 
 }
 
@@ -179,14 +223,23 @@ $('#playAgain').on('click', function () {
     // if user chooses to play again, variables are all reset
     wordAttempt = '';
     workingDivs = [];
-    divIdIndex = 0
+    divIdIndex = 0;
+    attemptNo = 0;
     // next word is selected
     randomNum();
     // modal is hidden again
+    $('#modalContent').empty();
     $('#winModal').removeClass('modalSeen')
-    // all classes are removed, divs are emptied
+
     for (let i = 0; i < divFocus.length; i++) {
         $(divFocus[i]).empty()
         $(divFocus[i]).removeClass('correctGuess wrongGuess closeGuess addLetter');
     }
+
+    for (let j = 0; j < keys.length; j++) {
+        $(keys[j]).removeClass('correctGuess wrongGuess closeGuess')
+    }
+
+    // all classes are removed, divs are emptied
+
 })
