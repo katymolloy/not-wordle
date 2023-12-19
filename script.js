@@ -38,7 +38,7 @@ $(keys).on('click', function () {
     switch ($(this).val()) {
         case 'enter':
             if ($.inArray(wordAttempt.toLowerCase(), validGuesses) !== -1) {
-                checkAnswer(wordAttempt.toLowerCase());
+                checkAnswer(wordAttempt);
                 wordAttempt = '';
             } else {
                 $(workingDivs[0]).parent().addClass('wrongAnswer')
@@ -60,7 +60,7 @@ $(keys).on('click', function () {
             break;
         default:
             if (wordAttempt.length < 5) {
-                $(divFocus[divIdIndex]).text($(this).val());
+                $(divFocus[divIdIndex]).text($(this).val().toUpperCase());
                 $(divFocus[divIdIndex]).addClass('addLetter');
                 workingDivs.push('#' + divFocus[divIdIndex].id)
                 // workingLetters.push(e.key.toUpperCase())
@@ -93,9 +93,6 @@ $(document).keypress(function (e) {
             workingLetters.push(e.key.toUpperCase())
 
             wordAttempt += e.key;
-            // setTimeout(() => {
-            //     $(divFocus[divIdIndex]).removeClass('addLetter')
-            // }, 1000)
 
             divIdIndex++;
         } else {
@@ -117,7 +114,7 @@ $(document).keydown(function (e) {
         // enter
         case 13:
             // ensure word input is valid
-            if ($.inArray(wordAttempt, validGuesses) !== -1) {
+            if ($.inArray(wordAttempt.toLowerCase(), validGuesses) !== -1) {
                 checkAnswer(wordAttempt);
                 wordAttempt = '';
 
@@ -135,6 +132,7 @@ $(document).keydown(function (e) {
                 wordAttempt = wordAttempt.slice(0, -1)
                 $(divFocus[divIdIndex]).removeClass('addLetter')
                 divIdIndex--
+                $(divFocus[divIdIndex]).removeClass('addLetter')
                 workingDivs.splice(-1, 1)
                 $(divFocus[divIdIndex]).empty();
                 break;
@@ -160,6 +158,7 @@ const checkAnswer = (word) => {
 
                         for (let j = 0; j < keys.length; j++) {
                             if (keys[j].value === word[i]) {
+                                $(keys[j]).removeClass('correctGuess closeGuess wrongGuess')
                                 $(keys[j]).addClass('correctGuess')
                             }
                         }
@@ -169,6 +168,7 @@ const checkAnswer = (word) => {
 
                         for (let j = 0; j < keys.length; j++) {
                             if (keys[j].value === word[i]) {
+                                $(keys[j]).removeClass('correctGuess closeGuess wrongGuess')
                                 $(keys[j]).addClass('closeGuess')
                             }
                         }
@@ -178,6 +178,7 @@ const checkAnswer = (word) => {
 
                         for (let j = 0; j < keys.length; j++) {
                             if (keys[j].value === word[i]) {
+                                $(keys[j]).removeClass('correctGuess closeGuess wrongGuess')
                                 $(keys[j]).addClass('wrongGuess')
                             }
                         }
@@ -195,6 +196,8 @@ const checkAnswer = (word) => {
                 break;
         }
 
+    }else{
+        celebration(winner)
     }
 }
 
@@ -203,14 +206,14 @@ const celebration = (w) => {
     switch (w) {
         case true:
             setTimeout(() => {
-                $('#modalContent').text('Congrats! You correctly guessed the word.')
+                $('#modalContent').html('Congrats! You correctly guessed the word.<br/>Click Close to review your game, or Play Again for another game.')
                 $('#winModal').addClass('modalSeen')
             }, 1000)
 
             break;
         case false:
             setTimeout(() => {
-                $('#modalContent').text("Sorry, you lost this game. Try again?")
+                $('#modalContent').html('Sorry, you lost this game.<br/>Click Close to review your game, or Play Again for another game.')
                 $('#winModal').addClass('modalSeen')
             }, 1000)
             break;
@@ -242,4 +245,9 @@ $('#playAgain').on('click', function () {
 
     // all classes are removed, divs are emptied
 
+})
+
+$('#exitModal').on('click', function () {
+    $('#modalContent').empty();
+    $('#winModal').removeClass('modalSeen')
 })
