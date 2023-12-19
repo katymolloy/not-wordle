@@ -5,25 +5,8 @@
   --correct: #538d4e;
   --close: #b59f3b;
   --notInWord: #3a3a3c;
-}
-
-.modal{
-  display: none;
-  visibility: hidden;
-  background-color: white;
-  padding:20px;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem
-}
-
-#modalButtons{
-  display: flex;
-  justify-content: flex-end;
+  --currentDiv: #565758;
+  --keyboardKey: #818384;
 }
 
 body {
@@ -42,26 +25,35 @@ h1 {
   font-family: gambado-sans-forte, sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 45px;
+  font-size: 40px;
+  margin-bottom: 0;
 }
 
 hr {
-  border-top: 0.2px solid var(--accentGray);
-  /* width: 100%; */
+  border: none; /* Remove default border */
+  height: 1px; /* Set the height of the line */
+  background-color: var(
+    --accentGray
+  ); /* Set the background color of the line */
+  margin: 0;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 #mainContainer {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-#row1,
-#row2,
-#row3,
-#row4,
-#row5,
-#row6 {
+#letterRow1,
+#letterRow2,
+#letterRow3,
+#letterRow4,
+#letterRow5,
+#letterRow6 {
   display: flex;
   gap: 0.3rem;
 }
@@ -79,6 +71,97 @@ hr {
   color: var(--text);
 }
 
+/* button keyboard styling */
+button {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  height: 58px;
+  width: 40px;
+  font-size: 1.2em;
+  background-color: var(--keyboardKey);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.keyboardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+#enter,
+#back {
+  font-size: 13px;
+  width: 60px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+
+  font-family: "Material Icons Outlined"; /* Ensure you set the correct font family */
+  font-size: 6em; /* Adjust the size as needed */
+}
+
+.keyboardKey {
+  vertical-align: middle;
+}
+
+/* wrong answer animation */
+.wrongAnswer {
+  animation: shake 0.2s ease-in-out 0s 2;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-7px);
+  }
+  50% {
+    transform: translateX(7px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+/* letter enter animation */
+.addLetter {
+  animation: grow 0.08s linear 0s 1;
+  border-color: var(--currentDiv);
+}
+
+@keyframes grow {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.1;
+  }
+}
+
+/* winning animation :D */
+.hellYeah {
+  animation: emphasize 0.3s ease-in-out 0s 1;
+}
+
+@keyframes emphasize {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.2;
+  }
+}
+
+/* guess classes */
 .correctGuess {
   background-color: var(--correct);
   border-color: var(--correct);
@@ -94,25 +177,22 @@ hr {
   border-color: var(--notInWord);
 }
 
-.wrongAnswer {
-  animation: shake 0.3s ease-in-out 0s 1;
+/* modal styling */
+.modal {
+  display: none;
+  visibility: hidden;
+  background-color: white;
+  padding: 20px;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-7px);
-  }
-  50% {
-    transform: translateX(7px);
-  }
-  75% {
-    transform: translateX(-5px);
-  }
-}
-
-.hellYeah{
-  animation: shake 0.3s ease-in-out 0s 1;
+#modalButtons {
+  display: flex;
+  justify-content: flex-end;
 }

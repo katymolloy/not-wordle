@@ -8,14 +8,16 @@
 
     <!-- font import -->
     <link rel="stylesheet" href="https://use.typekit.net/bca5qop.css" />
+    <!-- icon import -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script defer src="script.js"></script>
     <title>(Not) Wordle</title>
   </head>
   <body>
     <header>
       <h1>Not Wordle</h1>
-      <hr />
     </header>
+    <hr />
     <div id="winModal" class="modal">
       <div id="modalContent">Congrats! You correctly guessed the word</div>
       <div id="modalButtons">
@@ -24,42 +26,42 @@
     </div>
     <main id="mainContainer">
       <div id="inputContainer">
-        <div id="row1">
+        <div id="letterRow1">
           <div class="letterInput" id="a1"></div>
           <div class="letterInput" id="a2"></div>
           <div class="letterInput" id="a3"></div>
           <div class="letterInput" id="a4"></div>
           <div class="letterInput" id="a5"></div>
         </div>
-        <div id="row2">
+        <div id="letterRow2">
           <div class="letterInput" id="b1"></div>
           <div class="letterInput" id="b2"></div>
           <div class="letterInput" id="b3"></div>
           <div class="letterInput" id="b4"></div>
           <div class="letterInput" id="b5"></div>
         </div>
-        <div id="row3">
+        <div id="letterRow3">
           <div class="letterInput" id="c1"></div>
           <div class="letterInput" id="c2"></div>
           <div class="letterInput" id="c3"></div>
           <div class="letterInput" id="c4"></div>
           <div class="letterInput" id="c5"></div>
         </div>
-        <div id="row4">
+        <div id="letterRow4">
           <div class="letterInput" id="d1"></div>
           <div class="letterInput" id="d2"></div>
           <div class="letterInput" id="d3"></div>
           <div class="letterInput" id="d4"></div>
           <div class="letterInput" id="d5"></div>
         </div>
-        <div id="row5">
+        <div id="letterRow5">
           <div class="letterInput" id="e1"></div>
           <div class="letterInput" id="e2"></div>
           <div class="letterInput" id="e3"></div>
           <div class="letterInput" id="e4"></div>
           <div class="letterInput" id="e5"></div>
         </div>
-        <div id="row6">
+        <div id="letterRow6">
           <div class="letterInput" id="f1"></div>
           <div class="letterInput" id="f2"></div>
           <div class="letterInput" id="f3"></div>
@@ -67,7 +69,48 @@
           <div class="letterInput" id="f5"></div>
         </div>
       </div>
-      <div class="keyboardContainer"></div>
+      <div class="keyboardContainer">
+        <div class="keyRow1">
+          <button class="keyboardKey" type="button" value="Q">Q</button>
+          <button class="keyboardKey" type="button" value="W">W</button>
+          <button class="keyboardKey" type="button" value="E">E</button>
+          <button class="keyboardKey" type="button" value="R">R</button>
+          <button class="keyboardKey" type="button" value="T">T</button>
+          <button class="keyboardKey" type="button" value="Y">Y</button>
+          <button class="keyboardKey" type="button" value="U">U</button>
+          <button class="keyboardKey" type="button" value="I">I</button>
+          <button class="keyboardKey" type="button" value="O">O</button>
+          <button class="keyboardKey" type="button" value="P">P</button>
+        </div>
+        <div class="keyRow2">
+          <button class="keyboardKey" type="button" value="A">A</button>
+          <button class="keyboardKey" type="button" value="S">S</button>
+          <button class="keyboardKey" type="button" value="D">D</button>
+          <button class="keyboardKey" type="button" value="F">F</button>
+          <button class="keyboardKey" type="button" value="G">G</button>
+          <button class="keyboardKey" type="button" value="H">H</button>
+          <button class="keyboardKey" type="button" value="J">J</button>
+          <button class="keyboardKey" type="button" value="K">K</button>
+          <button class="keyboardKey" type="button" value="L">L</button>
+        </div>
+        <div class="keyRow3">
+          <button class="keyboardKey" type="button" id="enter" value="enter">
+            ENTER
+          </button>
+          <button class="keyboardKey" type="button" value="Z">Z</button>
+          <button class="keyboardKey" type="button" value="X">X</button>
+          <button class="keyboardKey" type="button" value="C">C</button>
+          <button class="keyboardKey" type="button" value="V">V</button>
+          <button class="keyboardKey" type="button" value="B">B</button>
+          <button class="keyboardKey" type="button" value="N">N</button>
+          <button class="keyboardKey" type="button" value="M">M</button>
+          <button class="keyboardKey" type="button" id="back" value="back">
+            <span class="material-symbols-outlined">
+              backspace
+              </span>
+          </button>
+        </div>
+      </div>
     </main>
   </body>
 </html>
