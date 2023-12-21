@@ -11,15 +11,19 @@ let workingDivs = [];
 let divIdIndex = 0;
 
 
-// function to select a word as the correct answer
+var alphaKeyCodes = [
+    65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+    97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122
+];
+
+
+
 function randomNum() {
     let index = Math.floor(Math.random() * (ALL_WORDS + 1));
 
     $.get('./data/wordle-answers-alphabetical.txt', function (data) {
         everyWord = data.split("\n");
         wordToFind = everyWord[index]
-        // take out before adding to vercel - no cheating on my watch
-        console.log(wordToFind)
     }, 'text');
 
     $.get('./data/valid-wordle-words.txt', function (data) {
@@ -35,11 +39,9 @@ $(keys).on('click', function () {
         case 'enter':
             handleEnter();
             break;
-
         case 'back':
             handleBackspace();
             break;
-
         default:
             handleAddLetter($(this).val())
             break;
@@ -49,13 +51,13 @@ $(keys).on('click', function () {
 
 
 
-
-
 $(document).keypress(function (e) {
-    if (e.which !== 13 && e.which !== 8) {
+    if ($.inArray(e.which, alphaKeyCodes) !== -1) {
         handleAddLetter(e.key)
-
+    } else {
+        console.log('Invalid key entered')
     }
+
 });
 
 
@@ -91,11 +93,8 @@ const handleEnter = () => {
         checkAnswer(wordAttempt);
         wordAttempt = '';
         attemptNo++;
-
     } else {
         $(workingDivs[0]).parent().addClass('wrongAnswer')
-        workingDivs = [];
-
     }
     setTimeout(() => {
         $(workingDivs[0]).parent().removeClass('wrongAnswer')
@@ -156,23 +155,18 @@ const handleColorCoding = (word) => {
 
 
 const checkAnswer = (word) => {
-
     switch (word === wordToFind) {
         case false:
-            console.log(attemptNo)
             if (attemptNo < 5) {
                 handleColorCoding(wordAttempt);
+                workingDivs = [];
             } else {
                 handleColorCoding(wordAttempt);
                 celebration(false)
             }
+            break;
 
-            workingDivs = [];
-            break
-            ;
         case true:
-            console.log(attemptNo)
-
             for (let i = 0; i < workingDivs.length; i++) {
                 $(workingDivs[i]).addClass('correctGuess hellYeah')
             }
@@ -186,14 +180,13 @@ const celebration = (w) => {
     switch (w) {
         case true:
             setTimeout(() => {
-                $('#modalContent').html('Congrats! You correctly guessed the word.<br/>Click Close to review your game, or Play Again for another game.')
+                $('#modalContent').html('<h2>Congrats!</h2><br/>You correctly guessed the word.<br/>Click Close to review your game, or Play Again for another game.')
                 $('#winModal').addClass('modalSeen')
             }, 1000)
-
             break;
         case false:
             setTimeout(() => {
-                $('#modalContent').html('Sorry, you lost this game.<br/>Click Close to review your game, or Play Again for another game.')
+                $('#modalContent').html(`<h2>Better luck next time.</h2><br/>The correct word was ${wordToFind}. <br/>Click Close to review your game, or Play Again for another game.`)
                 $('#winModal').addClass('modalSeen')
             }, 1000)
             break;
