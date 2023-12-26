@@ -93,8 +93,8 @@ button {
 }
 
 .keyRow1,
-.keyRow2, 
-.keyRow3{
+.keyRow2,
+.keyRow3 {
   display: flex;
   gap: 7px;
 }
@@ -229,7 +229,6 @@ button {
   border-radius: 4px;
 }
 
-
 h2 {
   color: var(--background);
   font-family: gambado-sans-forte, sans-serif;
@@ -243,5 +242,18 @@ h2 {
   button {
     height: 48px;
     width: 30px;
+    font-size: 1em;
+  }
+
+  .keyRow1,
+  .keyRow2,
+  .keyRow3,
+  .keyboardContainer {
+    gap: 4px;
+  }
+
+  #enter,
+  #back {
+    width: 60px;
   }
 }
