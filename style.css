@@ -44,8 +44,8 @@ hr {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 2rem;
-  margin-top: 1rem;
+  gap: 1rem;
+  margin-top: 0.3rem;
 }
 
 #letterRow1,
@@ -60,8 +60,8 @@ hr {
 
 .letterInput {
   border: solid 2px var(--accentGray);
-  height: 3.6rem;
-  width: 3.6rem;
+  height: 3.4rem;
+  width: 3.4rem;
   margin-bottom: 0.36rem;
   font-size: 35px;
   font-weight: 600;
@@ -88,7 +88,7 @@ button {
 .keyboardContainer {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 5px;
   align-items: center;
 }
 
@@ -96,7 +96,7 @@ button {
 .keyRow2,
 .keyRow3 {
   display: flex;
-  gap: 7px;
+  gap: 5px;
 }
 
 #enter,
@@ -239,10 +239,15 @@ h2 {
 }
 
 @media only screen and (max-width: 600px) {
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
   button {
     height: 48px;
     width: 30px;
     font-size: 1em;
+    text-align: center;
   }
 
   .keyRow1,

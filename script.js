@@ -1,24 +1,19 @@
 
-const ALL_WORDS = 2315;
 const divFocus = $('.letterInput');
 const keys = $('.keyboardKey').toArray();
-let validGuesses = [];
-let everyWord = []
-let wordToFind = '';
-let wordAttempt = '';
-let attemptNo = 0;
-let workingDivs = [];
-let divIdIndex = 0;
-
-
-var alphaKeyCodes = [
-    65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
-    97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122
-];
+var validGuesses = [];
+var everyWord = []
+var wordToFind = '';
+var wordAttempt = '';
+var attemptNo = 0;
+var workingDivs = [];
+var divIdIndex = 0;
 
 
 
 function randomNum() {
+
+    const ALL_WORDS = 2315;
     let index = Math.floor(Math.random() * (ALL_WORDS + 1));
 
     $.get('./data/wordle-answers-alphabetical.txt', function (data) {
@@ -52,7 +47,12 @@ $(keys).on('click', function () {
 
 
 $(document).keypress(function (e) {
-    if ($.inArray(e.which, alphaKeyCodes) !== -1) {
+    const KEY_CODES = [
+        65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+        97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122
+    ];
+
+    if ($.inArray(e.which, KEY_CODES) !== -1) {
         handleAddLetter(e.key)
     } else {
         console.log('Invalid key entered')
