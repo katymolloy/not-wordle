@@ -1,6 +1,6 @@
 
-const divFocus = $('.letterInput');
-const keys = $('.keyboardKey').toArray();
+const DIV = $('.letterInput');
+const KEYS = $('.keyboardKey').toArray();
 var validGuesses = [];
 var everyWord = []
 var wordToFind = '';
@@ -29,7 +29,7 @@ randomNum();
 
 
 
-$(keys).on('click', function () {
+$(KEYS).on('click', function () {
     switch ($(this).val()) {
         case 'enter':
             handleEnter();
@@ -78,11 +78,11 @@ $(document).keydown(function (e) {
 const handleBackspace = () => {
     if (wordAttempt.length > 0) {
         wordAttempt = wordAttempt.slice(0, -1)
-        $(divFocus[divIdIndex]).removeClass('addLetter')
+        $(DIV[divIdIndex]).removeClass('addLetter')
         divIdIndex--
-        $(divFocus[divIdIndex]).removeClass('addLetter')
+        $(DIV[divIdIndex]).removeClass('addLetter')
         workingDivs.splice(-1, 1)
-        $(divFocus[divIdIndex]).empty();
+        $(DIV[divIdIndex]).empty();
     }
 }
 
@@ -105,9 +105,9 @@ const handleEnter = () => {
 
 const handleAddLetter = (letter) => {
     if (wordAttempt.length < 5) {
-        $(divFocus[divIdIndex]).text(letter.toUpperCase());
-        $(divFocus[divIdIndex]).addClass('addLetter');
-        workingDivs.push('#' + divFocus[divIdIndex].id)
+        $(DIV[divIdIndex]).text(letter.toUpperCase());
+        $(DIV[divIdIndex]).addClass('addLetter');
+        workingDivs.push('#' + DIV[divIdIndex].id)
 
         wordAttempt += letter;
 
@@ -123,30 +123,30 @@ const handleColorCoding = (word) => {
         if (word[i] === wordToFind[i]) {
             $(workingDivs[i]).addClass('correctGuess')
 
-            for (let j = 0; j < keys.length; j++) {
-                if (keys[j].value === word[i]) {
-                    $(keys[j]).removeClass('correctGuess closeGuess wrongGuess')
-                    $(keys[j]).addClass('correctGuess')
+            for (let j = 0; j < KEYS.length; j++) {
+                if (KEYS[j].value === word[i]) {
+                    $(KEYS[j]).removeClass('correctGuess closeGuess wrongGuess')
+                    $(KEYS[j]).addClass('correctGuess')
                 }
             }
 
         } else if (wordToFind.includes(word[i])) {
             $(workingDivs[i]).addClass('closeGuess');
 
-            for (let j = 0; j < keys.length; j++) {
-                if (keys[j].value === word[i]) {
-                    $(keys[j]).removeClass('correctGuess closeGuess wrongGuess')
-                    $(keys[j]).addClass('closeGuess')
+            for (let j = 0; j < KEYS.length; j++) {
+                if (KEYS[j].value === word[i]) {
+                    $(KEYS[j]).removeClass('correctGuess closeGuess wrongGuess')
+                    $(KEYS[j]).addClass('closeGuess')
                 }
             }
 
         } else {
             $(workingDivs[i]).addClass('wrongGuess');
 
-            for (let j = 0; j < keys.length; j++) {
-                if (keys[j].value === word[i]) {
-                    $(keys[j]).removeClass('correctGuess closeGuess wrongGuess')
-                    $(keys[j]).addClass('wrongGuess')
+            for (let j = 0; j < KEYS.length; j++) {
+                if (KEYS[j].value === word[i]) {
+                    $(KEYS[j]).removeClass('correctGuess closeGuess wrongGuess')
+                    $(KEYS[j]).addClass('wrongGuess')
                 }
             }
         }
@@ -205,13 +205,13 @@ $('#playAgain').on('click', function () {
     $('#modalContent').empty();
     $('#winModal').removeClass('modalSeen')
 
-    for (let i = 0; i < divFocus.length; i++) {
-        $(divFocus[i]).empty()
-        $(divFocus[i]).removeClass('correctGuess wrongGuess closeGuess addLetter');
+    for (let i = 0; i < DIV.length; i++) {
+        $(DIV[i]).empty()
+        $(DIV[i]).removeClass('correctGuess wrongGuess closeGuess addLetter');
     }
 
-    for (let j = 0; j < keys.length; j++) {
-        $(keys[j]).removeClass('correctGuess wrongGuess closeGuess')
+    for (let j = 0; j < KEYS.length; j++) {
+        $(KEYS[j]).removeClass('correctGuess wrongGuess closeGuess')
     }
 })
 
